@@ -12,6 +12,13 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
+	<!-- 自定义监听器
+		建议将自定义监听器放置在框架监听器后面。让框架先初始化，我们自己内容后初始化，因为，我们的监听器可能会用到Spring框架初始化内容
+	 -->
+	<listener>
+		<listener-class>com.atguigu.atcrowdfunding.listener.AppStartUpListener</listener-class>
+	</listener>
 
 
 	<!-- 字符编码过滤器 -->
