@@ -1,5 +1,8 @@
 package com.atguigu.atcrowdfunding.bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TMenu {
     private Integer id;
 
@@ -10,6 +13,8 @@ public class TMenu {
     private String icon;
 
     private String url;
+    
+    List<TMenu> children = new ArrayList<TMenu>(); //创建对象进行初始化，防止空指针
 
     public Integer getId() {
         return id;
@@ -50,4 +55,20 @@ public class TMenu {
     public void setUrl(String url) {
         this.url = url == null ? null : url.trim();
     }
+
+	public List<TMenu> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<TMenu> children) {
+		this.children = children;
+	}
+
+	@Override
+	public String toString() {
+		return "TMenu [id=" + id + ", pid=" + pid + ", name=" + name + ", icon=" + icon + ", url=" + url + ", children="
+				+ children + "]";
+	}
+    
+    
 }

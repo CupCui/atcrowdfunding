@@ -12,6 +12,7 @@ import com.atguigu.atcrowdfunding.bean.TAdminExample;
 import com.atguigu.atcrowdfunding.mapper.TAdminMapper;
 import com.atguigu.atcrowdfunding.service.AdminService;
 import com.atguigu.atcrowdfunding.util.Const;
+import com.atguigu.atcrowdfunding.util.MD5Util;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -32,7 +33,7 @@ public class AdminServiceImpl implements AdminService {
 		
 		TAdmin admin = list.get(0);
 		
-		if(!admin.getUserpswd().equals(userpswd)) {
+		if(!admin.getUserpswd().equals(MD5Util.digest(userpswd))) {
 			throw new LoginException(Const.LOGIN_USERPSWD_ERROR);
 		}
 		
