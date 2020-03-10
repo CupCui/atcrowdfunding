@@ -15,7 +15,7 @@
 		<property name="plugins">
 			<bean class="com.github.pagehelper.PageInterceptor">
 				<property name="properties">
-					<!--分页合理化 -->
+					<!--分页合理化:例如：查询的页不存在，插件会自动跳转最后一页 -->
 					<value>reasonable=true</value>
 				</property>
 			</bean>
