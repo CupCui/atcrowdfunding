@@ -41,5 +41,25 @@ public class RoleServiceImpl implements RoleService {
 		
 		return page;
 	}
+
+	@Override
+	public void saveRole(TRole role) {
+		roleMapper.insertSelective(role);
+	}
+
+	@Override
+	public TRole getRoleById(Integer id) {
+		return roleMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public void updateRole(TRole role) {
+		roleMapper.updateByPrimaryKeySelective(role);
+	}
+
+	@Override
+	public void deleteRole(Integer id) {
+		roleMapper.deleteByPrimaryKey(id);
+	}
 	
 }
