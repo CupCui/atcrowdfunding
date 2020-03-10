@@ -21,4 +21,6 @@ public interface AdminService {
 
 	void deleteAdmin(Integer id);
 
+	void deleteBatchAdmin(String ids);
+
 }

@@ -31,7 +31,7 @@
 		  
 		  <c:if test="${not empty message }">
 			  <div class="form-group has-success has-feedback">
-					${message}
+					${message}    <%--  request.getAttribute("message") --%>
 			  </div> 
 		  </c:if>
 		  

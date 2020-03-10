@@ -9,6 +9,18 @@
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="createtime" jdbcType="CHAR" property="createtime" />
   </resultMap>
+  
+  <!-- void deleleBatch(@Param("idList") List<Integer> idList); 
+  		delete from t_admin where id in (1,2,3,4,5)
+  -->
+  <delete id="deleleBatch" >
+  	delete from t_admin where id in 
+  	<foreach collection="idList" open="(" separator="," close=")" item="id">
+  		#{id}
+  	</foreach>
+  </delete>
+  
+  
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

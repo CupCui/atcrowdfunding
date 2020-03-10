@@ -1,5 +1,6 @@
 package com.atguigu.atcrowdfunding.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -105,6 +106,22 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void deleteAdmin(Integer id) {
 		adminMapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public void deleteBatchAdmin(String ids) {
+		if(!StringUtils.isEmpty(ids)) {
+			
+			List<Integer> idList = new ArrayList<Integer>();
+			
+			String[] array = ids.split(",");
+			for (String idStr : array) {
+				int id = Integer.parseInt(idStr);
+				idList.add(id);
+			}
+			
+			adminMapper.deleleBatch(idList); //自定义
+		}
 	}
 	
 }

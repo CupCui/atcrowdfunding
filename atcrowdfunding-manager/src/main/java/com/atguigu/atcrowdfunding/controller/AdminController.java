@@ -21,6 +21,14 @@ public class AdminController {
 	AdminService adminService;
 	
 	
+	@RequestMapping("/admin/deleteBatch")
+	public String deleteBatch(String ids,Integer pageNum) {
+		
+		adminService.deleteBatchAdmin(ids);
+		
+		return "redirect:/admin/index?pageNum="+pageNum; //避免表单重复提交
+	}
+	
 	@RequestMapping("/admin/doDelete")
 	public String doDelete(Integer id,Integer pageNum) {
 		

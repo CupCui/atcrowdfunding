@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
 <%--  request.getRequestDispater("/login").forward(request,response); 后台路径 --%>
 <%-- <jsp:forward page="${PATH}/login"></jsp:forward> 不能增加${PATH}
 		后台路径：服务器端资源内部查找路径。斜杠开头表示当前上下文路径。

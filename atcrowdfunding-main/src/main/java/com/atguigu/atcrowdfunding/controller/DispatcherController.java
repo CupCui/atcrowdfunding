@@ -19,7 +19,7 @@ import com.atguigu.atcrowdfunding.util.Const;
 public class DispatcherController {
 
 	@Autowired
-	AdminService adminService;
+	AdminService adminService; //JDK动态代理【基于接口】、Cglib动态代理【基于继承】
 	
 	@Autowired
 	MenuService menuService;

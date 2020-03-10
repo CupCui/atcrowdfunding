@@ -44,7 +44,7 @@
   </div>
   <button id="searchBtn" type="button" class="btn btn-warning"><i class="glyphicon glyphicon-search"></i> 查询</button>
 </form>
-<button type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
+<button id="deleteBtachBtn" type="button" class="btn btn-danger" style="float:right;margin-left:10px;"><i class=" glyphicon glyphicon-remove"></i> 删除</button>
 <button type="button" class="btn btn-primary" style="float:right;" onclick="window.location.href='${PATH}/admin/toAdd'"><i class="glyphicon glyphicon-plus"></i> 新增</button>
 <br>
  <hr style="clear:both;">
@@ -53,7 +53,7 @@
               <thead>
                 <tr >
                   <th width="30">#</th>
-				  <th width="30"><input type="checkbox"></th>
+				  <th width="30"><input id="theadCheckbox" type="checkbox"></th>
                   <th>账号</th>
                   <th>名称</th>
                   <th>邮箱地址</th>
@@ -64,7 +64,7 @@
 	              <c:forEach items="${page.list }"  var="admin" varStatus="status">
 		                <tr>
 		                  <td>${status.count}</td>
-						  <td><input type="checkbox"></td>
+						  <td><input type="checkbox" adminId="${admin.id}"></td>
 		                  <td>${admin.loginacct }</td>
 		                  <td>${admin.username }</td>
 		                  <td>${admin.email }</td>
@@ -151,6 +151,62 @@
             		layer.close(index);
             	});
             });
+            
+            //=========================================================================================
+            $("#theadCheckbox").click(function(){
+            	var checkedStatus = this.checked ;
+            	//让表体的复选框状态等于表头复选框状态。
+            	var tbodyCheckboxList = $("tbody input[type='checkbox']");
+            	$.each(tbodyCheckboxList,function(i,e){  // i 表示索引； e表示迭代元素
+            		e.checked = checkedStatus;
+            	});
+            });	
+            
+            
+            $("#deleteBtachBtn").click(function(){
+            	//获取表体中打钩的
+            	var tbodyCheckedList = $("tbody input[type='checkbox']:checked");
+            	
+            	if(tbodyCheckedList.length==0){
+            		layer.msg("请选择要删除数据?",{time:1000});
+            		return false;
+            	}
+            	
+            	var paramStr = ''; //在js中拼串建议使用单引号。  paramStr = '1,2,3,4,5';
+            	
+            	var arrayIds = new Array();  //[1,2,3,4,5]
+            	
+            	$.each(tbodyCheckedList,function(i,e){  // i 表示索引； e表示迭代元素
+            		//获取自定义属性的值，将id拿到。
+            		//var adminId = e.adminId; //  e代表就是<input type="checkbox" adminId="5">  无法通过dom对象直接获取自定义属性
+            		var adminId = $(e).attr("adminId"); //  dom对象转换为jquery对象： $()
+            		//获取多个id值，如何传递给controller
+            		arrayIds.push(adminId);
+            	});
+            	paramStr = arrayIds.join(","); // 比  +=拼串 高级一些。
+            	
+            	layer.confirm('确定要批量删除吗?',{btn:['确定','取消'],icon:3,title:'提示'},function(index){
+            		window.location.href='${PATH}/admin/deleteBatch?ids='+paramStr+'&pageNum=${page.pageNum}';
+            		layer.close();
+            	},function(index){
+            		layer.close();
+            	});
+            	
+            });	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
+            	
             
             
         </script>
